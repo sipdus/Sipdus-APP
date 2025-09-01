@@ -78,10 +78,14 @@ export default function Login({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        <Text style={styles.registerText}>
-          Não tem uma conta?{" "}
-          <Text style={styles.registerLink}>Cadastre-se</Text>
-        </Text>
+         <View style={{ alignItems: "center" }}>
+          <Text style={styles.registerText}>
+           Não tem uma conta?{" "}
+         <TouchableOpacity onPress={() => navigation.navigate("Cadastro")}>
+         <Text style={styles.registerLink}>Cadastre-se</Text>
+         </TouchableOpacity>
+          </Text>
+        </View>
       </View>
     </View>
   );
@@ -95,20 +99,23 @@ const styles = StyleSheet.create({
     topContainer: {
       backgroundColor: "#fff",
       alignItems: "center",
-      justifyContent: "flex-end",
-      height: 220,
-      paddingBottom: 10,
+      justifyContent: "flex-start",
+      height: 200,         
+      paddingBottom: 30, 
     },
     logo: {
-      width: 350,
-      height: 350,
+      width: 400,
+      height: 3000,
       resizeMode: "contain",
+      marginTop: -1390,
+      alignItems: "center",
+      marginLeft: 20,
     },
     bottomContainer: {
       flex: 1,
-      backgroundColor: "#00bcd4", 
+      backgroundColor: "#00bcd4",
       borderTopLeftRadius: 80,
-      paddingTop: 30,
+      paddingTop: 90, 
       paddingHorizontal: 25,
     },
     label: {
@@ -133,12 +140,18 @@ const styles = StyleSheet.create({
       fontSize: 13,
       textDecorationLine: "underline",
     },
+    registerLink: {
+      marginTop
+    },
     button: {
       backgroundColor: "#fff",
       paddingVertical: 14,
       borderRadius: 25,
       alignItems: "center",
-      marginBottom: 25,
+      marginBottom: 30,
+      width: 280, 
+      alignSelf: "center",
+      marginTop: 30,
     },
     buttonText: {
       color: "#00bcd4",
@@ -149,6 +162,7 @@ const styles = StyleSheet.create({
       flexDirection: "row",
       justifyContent: "center",
       marginBottom: 25,
+      marginTop: 0,
     },
     socialButton: {
       backgroundColor: "#fff",
@@ -166,6 +180,7 @@ const styles = StyleSheet.create({
       color: "#000",
       textAlign: "center",
       fontSize: 14,
+      marginTop: 40,
     },
     registerLink: {
       fontWeight: "bold",

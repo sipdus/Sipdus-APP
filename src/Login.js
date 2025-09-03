@@ -104,10 +104,10 @@ const styles = StyleSheet.create({
       paddingBottom: 30, 
     },
     logo: {
-      width: 400,
+      width: 350,
       height: 3000,
       resizeMode: "contain",
-      marginTop: -1390,
+      marginTop: -1400,
       alignItems: "center",
       marginLeft: 20,
     },
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
       textDecorationLine: "underline",
     },
     registerLink: {
-      marginTop
+      marginTop: 10,
     },
     button: {
       backgroundColor: "#fff",

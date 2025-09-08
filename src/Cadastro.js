@@ -11,7 +11,6 @@ import {
   ScrollView,
   ImageBackground,
 } from "react-native";
-
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import CheckBox from "react-native-check-box";
 
@@ -122,8 +121,11 @@ export default function Cadastro({ navigation }) {
             </Text>
           </View>
 
-          <TouchableOpacity style={styles.button} onPress={handleCadastro}>
-            <Text style={styles.buttonText}>Cadastrar</Text>
+          <TouchableOpacity 
+          style={styles.button} 
+          onPress={() => navigation.navigate("Login")}
+          >
+          <Text style={styles.buttonText}>Cadastrar</Text>
           </TouchableOpacity>
         </View>
       </View>

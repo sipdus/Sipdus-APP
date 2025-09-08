@@ -50,8 +50,8 @@ export default function Login({ navigation }) {
           <Text style={styles.forgotText}>Esqueci minha senha...</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Login</Text>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("TelaInicial")}>
+        <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
         <View style={styles.socialContainer}>

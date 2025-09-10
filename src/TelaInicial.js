@@ -11,10 +11,10 @@ const DATA = [
 
 export default function TelaInicial() {
   const renderItem = ({ item }) => (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card}>
       <Image source={item.image} style={styles.cardImage} />
       <Text style={styles.cardText}>{item.title}</Text>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -38,7 +38,7 @@ export default function TelaInicial() {
 
       {/* ÁREA AZUL COM OS CARDS */}
       <View style={styles.blueContainer}>
-      <Text style={styles.subtitleText}>Suas informações:</Text>
+        <Text style={styles.subtitleText}>Suas informações:</Text>
         <FlatList
           data={DATA}
           keyExtractor={item => item.id}
@@ -106,8 +106,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingHorizontal: 20,
     paddingVertical: 10,
-    marginTop: -80,
     alignItems: "center",
+    marginBottom: -15, // puxa o "Olá, User" um pouco mais para cima
+    marginTop: -50, // reduz o espaço acima do "Olá, User"
   },
   helloText: {
     color: "#000",
@@ -115,48 +116,55 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   subtitleText: {
-    color: "#00000",
+    color: "#000",
     fontSize: 20,
-    marginTop: 4,
-    marginLeft:10,
-    marginTop:2,
+    marginLeft: 10,
+    marginTop: 2,
   },
   blueContainer: {
     flex: 1,
-    height: '100%',
+    height: "100%",
     backgroundColor: "#00BCD4",
-    borderTopLeftRadius: 25,  // só o canto superior esquerdo arredondado
-    borderTopRightRadius: 0,  // canto superior direito sem curva
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 0,
     paddingTop: 20,
+    marginTop: 10, // sobe a área azul (aproxima do Olá, User)
   },
   list: {
     paddingHorizontal: 20,
-    paddingBottom: 120, // espaço extra para não colar no footer
+    paddingBottom: 120,
+    marginTop: 10, // espaço entre "Suas informações:" e o primeiro card
   },
   card: {
     backgroundColor: "#fff",
-    borderRadius: 15,
-    padding: 16,
-    marginBottom: 12,
+    borderRadius: 18,
+    padding: 22,
+    marginBottom: 18,
     flexDirection: "row",
     alignItems: "center",
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 2 },
   },
   cardImage: {
-    width: 40,
-    height: 40,
-    marginRight: 16,
+    width: 55,
+    height: 55,
+    marginRight: 20,
     resizeMode: "contain",
   },
   cardText: {
-    fontSize: 18,
-    fontWeight: "500",
+    fontSize: 20,
+    fontWeight: "600",
+    color: "#000",
   },
   footer: {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
     backgroundColor: "#fff",
-    paddingVertical: 10,
+    paddingVertical: 12,
     borderTopWidth: 1,
     borderColor: "#ccc",
     position: "absolute",
@@ -167,19 +175,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   footerIcon: {
-    width: 36,
-    height: 30,
+    width: 45,
+    height: 38,
     marginBottom: 4,
     resizeMode: "contain",
   },
   footerIconLarge: {
-    width: 42,
-    height: 32,
+    width: 52,
+    height: 40,
     marginBottom: 4,
     resizeMode: "contain",
   },
   footerText: {
-    fontSize: 12,
+    fontSize: 14,
+    fontWeight: "600",
     color: "#000000",
   },
 });

@@ -9,12 +9,19 @@ const DATA = [
   { id: "5", title: "Refeições", image: require("../assets/refeicao.png") },
 ];
 
-export default function TelaInicial() {
+export default function TelaInicial({ navigation }) {
   const renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.card}>
-      <Image source={item.image} style={styles.cardImage} />
-      <Text style={styles.cardText}>{item.title}</Text>
-    </TouchableOpacity>
+  <TouchableOpacity
+    style={styles.card}
+    onPress={() => {
+      if (item.title === "Glicemia") {
+        navigation.navigate("GlicemiaScreen"); 
+      }
+    }}
+  >
+    <Image source={item.image} style={styles.cardImage} />
+    <Text style={styles.cardText}>{item.title}</Text>
+  </TouchableOpacity>
   );
 
   return (

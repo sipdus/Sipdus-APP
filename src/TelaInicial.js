@@ -11,11 +11,15 @@ const DATA = [
 
 export default function TelaInicial({ navigation }) {
   const renderItem = ({ item }) => (
-  <TouchableOpacity
+    <TouchableOpacity
     style={styles.card}
     onPress={() => {
       if (item.title === "Glicemia") {
-        navigation.navigate("GlicemiaScreen"); 
+        navigation.navigate("GlicemiaScreen");
+      } else if (item.title === "BPM") {
+        navigation.navigate("BPMScreen");
+      } else if (item.title === "Oximetria"){
+        navigation.navigate("OximetriaScreen");
       }
     }}
   >

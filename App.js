@@ -5,6 +5,8 @@ import Login from "./src/Login";
 import Cadastro from "./src/Cadastro";
 import TelaInicial from "./src/TelaInicial";
 import GlicemiaScreen from "./src/Glicemia";
+import BPMScreen from "./src/BPM";
+import OximetriaScreen from "./src/Oximetria";
 
 const Stack = createStackNavigator();
 
@@ -30,6 +32,16 @@ export default function App() {
         <Stack.Screen 
           name="GlicemiaScreen" 
           component={GlicemiaScreen} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="BPMScreen" 
+          component={BPMScreen} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="OximetriaScreen" 
+          component={OximetriaScreen} 
           options={{ headerShown: false }} 
         />
       </Stack.Navigator>

@@ -104,10 +104,10 @@ const styles = StyleSheet.create({
       paddingBottom: 30, 
     },
     logo: {
-      width: 350,
+      width: 275,
       height: 3000,
       resizeMode: "contain",
-      marginTop: -1400,
+      marginTop: -1380,
       alignItems: "center",
       marginLeft: 20,
     },
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: "#00bcd4",
       borderTopLeftRadius: 80,
-      paddingTop: 90, 
+      paddingTop: 60, 
       paddingHorizontal: 25,
     },
     label: {
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     },
     button: {
       backgroundColor: "#fff",
-      paddingVertical: 14,
+      paddingVertical: 12,
       borderRadius: 25,
       alignItems: "center",
       marginBottom: 30,
@@ -173,14 +173,14 @@ const styles = StyleSheet.create({
       borderColor: "#ccc",
     },
     socialIcon: {
-      width: 30,
-      height: 30,
+      width: 25,
+      height: 25,
     },
     registerText: {
       color: "#000",
       textAlign: "center",
       fontSize: 14,
-      marginTop: 40,
+      marginTop: 10,
     },
     registerLink: {
       fontWeight: "bold",

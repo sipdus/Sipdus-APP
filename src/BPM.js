@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Image } from "rea
 
 const windowWidth = Dimensions.get("window").width;
 
-export default function BPMScreen() {
+export default function BPMScreen({navigation}) {
   return (
     <View style={styles.container}>
       {/* TOPO BRANCO COM VOLTA (imagem inclui o texto "Sipdus") */}
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   topBar: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 20,
+    paddingHorizontal: 5,
     paddingTop: 50,
     paddingBottom: 10,
     backgroundColor: "#fff",
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     paddingVertical: 5,
-    marginBottom: -3,
+    marginBottom: 15,
   },
 
   helloText: {

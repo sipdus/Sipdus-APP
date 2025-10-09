@@ -101,9 +101,9 @@ const styles = StyleSheet.create({
   topBar: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 20,
+    paddingHorizontal: 5,
     paddingTop: 50,
-    paddingBottom: 10,
+    paddingBottom: 15,
     backgroundColor: "#fff",
   },
   backIcon: {
@@ -114,8 +114,8 @@ const styles = StyleSheet.create({
   greetingWhite: {
     backgroundColor: "#fff",
     alignItems: "center",
-    paddingVertical: 5,
-    marginBottom: -3,
+    paddingVertical: 10,
+    marginBottom: 10,
   },
   helloText: {
     color: "#000",
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 12,
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 25,
   },
   dataTitle: {
     fontSize: 14,
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
   box: {
     backgroundColor: "#fff",
     borderRadius: 10,
-    paddingVertical: 10,
+    paddingVertical: 20,
     paddingHorizontal: 15,
     width: "85%",
     alignItems: "center",

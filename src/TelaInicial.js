@@ -5,8 +5,9 @@ const DATA = [
   { id: "1", title: "Glicemia", image: require("../assets/glicemia.png") },
   { id: "2", title: "BPM", image: require("../assets/BPM.png") },
   { id: "3", title: "Oximetria", image: require("../assets/SP02.png") },
-  { id: "4", title: "Colesterol", image: require("../assets/colesterol.png") },
-  { id: "5", title: "Refeições", image: require("../assets/refeicao.png") },
+  //{ id: "4", title: "Colesterol", image: require("../assets/colesterol.png") },
+  //{ id: "5", title: "Refeições", image: require("../assets/refeicao.png") },
+  
 ];
 
 export default function TelaInicial({ navigation }) {
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
     color: "#00BCD4",
     backgroundColor: "#fff",
     paddingHorizontal: 16,
-    paddingVertical: 4,
+    paddingVertical: 50,
     borderRadius: 10,
   },
   iconLarge: {
@@ -139,17 +140,17 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 25,
     borderTopRightRadius: 0,
     paddingTop: 20,
-    marginTop: 10, // sobe a área azul (aproxima do Olá, User)
+    marginTop: 30, // sobe a área azul (aproxima do Olá, User)
   },
   list: {
     paddingHorizontal: 20,
     paddingBottom: 120,
-    marginTop: 10, // espaço entre "Suas informações:" e o primeiro card
+    marginTop: 15, // espaço entre "Suas informações:" e o primeiro card
   },
   card: {
     backgroundColor: "#fff",
     borderRadius: 18,
-    padding: 22,
+    padding: 25,
     marginBottom: 18,
     flexDirection: "row",
     alignItems: "center",

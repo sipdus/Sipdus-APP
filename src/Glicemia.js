@@ -1,19 +1,34 @@
 import React from "react";
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Image, ScrollView } from "react-native";
+import { LineChart } from "react-native-chart-kit";
 
 const windowWidth = Dimensions.get("window").width;
 
-export default function GlicemiaScreen({ navigation }) {
+export default function GlicemiaScreen({ navigation, ble }) {
+  const { glucose } = ble || {};
+
+  // Dados de exemplo (você pode trocar pelos valores reais coletados)
+  const glicemiaData = {
+    labels: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
+    datasets: [
+      {
+        data: [95, 102, 88, 110, 97, 120, glucose ?? 100], // inclui última leitura
+        color: () => "#007B83",
+        strokeWidth: 2,
+      },
+    ],
+  };
+
   return (
     <View style={styles.container}>
-      {/* TOPO BRANCO COM VOLTA (imagem inclui o texto "Sipdus") */}
+      {/* TOPO */}
       <View style={styles.topBar}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image source={require("../assets/volta.png")} style={styles.backIcon} />
         </TouchableOpacity>
       </View>
 
-      {/* USER CENTRALIZADO */}
+      {/* USER */}
       <View style={styles.greetingWhite}>
         <Text style={styles.helloText}>
           <Text style={{ fontWeight: "bold" }}>(User):</Text>
@@ -21,22 +36,42 @@ export default function GlicemiaScreen({ navigation }) {
       </View>
 
       {/* ÁREA AZUL */}
-      <View style={styles.blueContainer}>
-        <Text style={styles.titleText}>Glicemia</Text>
-        <Text style={styles.subtitleText}>Suas aferições:</Text>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={styles.blueContainer}>
+          <Text style={styles.titleText}>Glicemia</Text>
+          <Text style={styles.subtitleText}>Suas aferições:</Text>
 
-        {/* Gráfico */}
-        <View style={styles.graphContainer}>
-          <View style={styles.graphBox}>
-            <View style={styles.graphPlaceholder}>
-              <Text style={styles.graphText}>[ Gráfico aqui ]</Text>
+          {/* GRÁFICO */}
+          <View style={styles.graphContainer}>
+            <View style={styles.graphBox}>
+              <LineChart
+                data={glicemiaData}
+                width={windowWidth * 0.85}
+                height={220}
+                chartConfig={{
+                  backgroundColor: "#e9f7f8",
+                  backgroundGradientFrom: "#e9f7f8",
+                  backgroundGradientTo: "#e9f7f8",
+                  decimalPlaces: 0,
+                  color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                  labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                  propsForDots: { r: "4", strokeWidth: "2", stroke: "#007B83" },
+                }}
+                bezier
+                style={{
+                  borderRadius: 10,
+                }}
+              />
+              <Text style={styles.graphText}>
+                Última leitura: {glucose ?? "---"} mg/dL
+              </Text>
             </View>
-          </View>
 
-          {/* Média */}
-          <Text style={styles.mediaText}>A média da sua glicemia é --- mg/dL</Text>
+            {/* MÉDIA */}
+            <Text style={styles.mediaText}>A média da sua glicemia é --- mg/dL</Text>
+          </View>
         </View>
-      </View>
+      </ScrollView>
 
       {/* RODAPÉ */}
       <View style={styles.footer}>
@@ -60,12 +95,8 @@ export default function GlicemiaScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
+  container: { flex: 1, backgroundColor: "#fff" },
 
-  // TOPO
   topBar: {
     flexDirection: "row",
     alignItems: "center",
@@ -75,13 +106,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
 
-  backIcon: {
-    width: 160, // ← aumentei bastante o tamanho
-    height: 70,
-    resizeMode: "contain",
-  },
+  backIcon: { width: 160, height: 70, resizeMode: "contain" },
 
-  // USER CENTRALIZADO
   greetingWhite: {
     backgroundColor: "#fff",
     alignItems: "center",
@@ -89,18 +115,14 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
 
-  helloText: {
-    color: "#000",
-    fontSize: 20,
-    fontWeight: "bold",
-  },
+  helloText: { color: "#000", fontSize: 20, fontWeight: "bold" },
 
-  // ÁREA AZUL
   blueContainer: {
     flex: 1,
     backgroundColor: "#00BCD4",
     borderTopLeftRadius: 25,
     paddingTop: 20,
+    paddingBottom: 100,
   },
 
   titleText: {
@@ -118,47 +140,30 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
-  // GRÁFICO
-  graphContainer: {
-    marginTop: 45,
-    alignItems: "center",
-  },
+  graphContainer: { marginTop: 30, alignItems: "center" },
 
   graphBox: {
     width: windowWidth * 0.9,
     backgroundColor: "#e9f7f8",
     borderRadius: 15,
     paddingVertical: 20,
-    paddingHorizontal: 10,
     alignItems: "center",
-  },
-
-  graphPlaceholder: {
-    height: 200,
-    width: "90%",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    marginTop: 10,
   },
 
   graphText: {
-    color: "#aaa",
+    color: "#000",
+    marginTop: 10,
+    fontWeight: "500",
   },
 
-  // MÉDIA
   mediaText: {
     fontSize: 18,
     color: "#000",
-    marginTop: 30,
+    marginTop: 25,
     fontWeight: "bold",
     textAlign: "center",
   },
 
-  // RODAPÉ
   footer: {
     flexDirection: "row",
     justifyContent: "space-around",
@@ -172,9 +177,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 
-  footerItem: {
-    alignItems: "center",
-  },
+  footerItem: { alignItems: "center" },
 
   footerIcon: {
     width: 45,
@@ -190,9 +193,5 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
 
-  footerText: {
-    fontSize: 14,
-    fontWeight: "600",
-    color: "#000000",
-  },
+  footerText: { fontSize: 14, fontWeight: "600", color: "#000000" },
 });

@@ -1,100 +1,43 @@
 import React from "react";
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
-const windowWidth = Dimensions.get("window").width;
+export default function BPMScreen({ navigation, ble }) {
+  const { bpm } = ble;
 
-export default function BPMScreen({navigation}) {
   return (
     <View style={styles.container}>
-      {/* TOPO BRANCO COM VOLTA (imagem inclui o texto "Sipdus") */}
+      {/* TOPO */}
       <View style={styles.topBar}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image source={require("../assets/volta.png")} style={styles.backIcon} />
         </TouchableOpacity>
       </View>
 
-      {/* USER CENTRALIZADO */}
+      {/* USER */}
       <View style={styles.greetingWhite}>
-        <Text style={styles.helloText}>
-          <Text style={{ fontWeight: "bold" }}>(User):</Text>
-        </Text>
+        <Text style={styles.helloText}><Text style={{ fontWeight: "bold" }}>(User):</Text></Text>
       </View>
 
-      {/* CONTEÚDO PRINCIPAL */}
+      {/* CONTEÚDO */}
       <View style={styles.contentContainer}>
         <Text style={styles.title}>Batimentos por minuto:</Text>
 
-        {/* Coração e números lado a lado */}
         <View style={styles.heartRow}>
           <View style={styles.dataBox}>
             <Text style={styles.dataTitle}>Última leitura:</Text>
-            <Text style={styles.dataValue}>---</Text>
+            <Text style={styles.dataValue}>{bpm ?? "---"}</Text>
             <Text style={styles.dataSubtitle}>BPM</Text>
           </View>
 
-          <Image
-            source={require("../assets/coracao.png")}
-            style={styles.heartIcon}
-          />
+          <Image source={require("../assets/coracao.png")} style={styles.heartIcon} />
         </View>
 
-        {/* Faixas de frequência */}
-        <Text style={styles.subtitle}> Frequência cardíaca:</Text>
+        <Text style={styles.subtitle}>Frequência cardíaca:</Text>
 
-        <View style={styles.box}>
-          <Text style={styles.boxText}>
-            De 8 a 17 anos:{"\n"}
-            <Text style={styles.highlight}>80 a 100 BPM</Text>
-          </Text>
-        </View>
-
-        <View style={styles.box}>
-          <Text style={styles.boxText}>
-            Mulheres - 18 a 65 anos:{"\n"}
-            <Text style={styles.highlight}>73 a 78 BPM</Text>
-          </Text>
-        </View>
-
-        <View style={styles.box}>
-          <Text style={styles.boxText}>
-            Homens - 18 a 65 anos:{"\n"}
-            <Text style={styles.highlight}>70 a 76 BPM</Text>
-          </Text>
-        </View>
-
-        <View style={styles.box}>
-          <Text style={styles.boxText}>
-            Idosos (mais de 65 anos):{"\n"}
-            <Text style={styles.highlight}>50 a 60 BPM</Text>
-          </Text>
-        </View>
-      </View>
-
-      {/* RODAPÉ */}
-      <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerItem}>
-          <Image
-            source={require("../assets/inicio.png")}
-            style={styles.footerIconLarge}
-          />
-          <Text style={styles.footerText}>Início</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.footerItem}>
-          <Image
-            source={require("../assets/servicos.png")}
-            style={styles.footerIcon}
-          />
-          <Text style={styles.footerText}>Serviços</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.footerItem}>
-          <Image
-            source={require("../assets/configuracoes.png")}
-            style={styles.footerIcon}
-          />
-          <Text style={styles.footerText}>Config.</Text>
-        </TouchableOpacity>
+        <View style={styles.box}><Text style={styles.boxText}>De 8 a 17 anos: <Text style={styles.highlight}>80 a 100 BPM</Text></Text></View>
+        <View style={styles.box}><Text style={styles.boxText}>Mulheres 18-65 anos: <Text style={styles.highlight}>73 a 78 BPM</Text></Text></View>
+        <View style={styles.box}><Text style={styles.boxText}>Homens 18-65 anos: <Text style={styles.highlight}>70 a 76 BPM</Text></Text></View>
+        <View style={styles.box}><Text style={styles.boxText}>Idosos (mais de 65 anos): <Text style={styles.highlight}>50 a 60 BPM</Text></Text></View>
       </View>
     </View>
   );

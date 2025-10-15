@@ -1,93 +1,47 @@
 import React from "react";
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
-const windowWidth = Dimensions.get("window").width;
+export default function OximetriaScreen({ navigation, ble }) {
+  const { spo2 } = ble;
 
-export default function OximetriaScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      {/* TOPO BRANCO COM VOLTA (imagem inclui o texto "Sipdus") */}
       <View style={styles.topBar}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image source={require("../assets/volta.png")} style={styles.backIcon} />
         </TouchableOpacity>
       </View>
 
-      {/* USER CENTRALIZADO */}
       <View style={styles.greetingWhite}>
-        <Text style={styles.helloText}>
-          <Text style={{ fontWeight: "bold" }}>(User):</Text>
-        </Text>
+        <Text style={styles.helloText}><Text style={{ fontWeight: "bold" }}>(User):</Text></Text>
       </View>
 
-      {/* CONTEÚDO PRINCIPAL */}
       <View style={styles.contentContainer}>
         <Text style={styles.title}>Oximetria:</Text>
 
-        {/* ÍCONE DO OXÍMETRO E VALOR */}
         <View style={styles.oximeterRow}>
           <View style={styles.dataBox}>
             <Text style={styles.dataTitle}>Última leitura:</Text>
-            <Text style={styles.dataValue}>--</Text>
+            <Text style={styles.dataValue}>{spo2 ?? "--"}</Text>
             <Text style={styles.dataSubtitle}>SpO₂</Text>
           </View>
 
-          <Image
-            source={require("../assets/oximetro.png")}
-            style={styles.oximeterIcon}
-          />
+          <Image source={require("../assets/oximetro.png")} style={styles.oximeterIcon} />
         </View>
 
-        {/* Tabela de porcentagens */}
         <Text style={styles.subtitle}>Tabela de porcentagens:</Text>
 
         <View style={[styles.box, { borderColor: "#4CAF50", borderWidth: 2 }]}>
-          <Text style={styles.boxText}>
-            Normal:{" "}
-            <Text style={styles.highlightGreen}>95% - 100%</Text>
-          </Text>
+          <Text style={styles.boxText}>Normal: <Text style={styles.highlightGreen}>95% - 100%</Text></Text>
         </View>
 
         <View style={[styles.box, { borderColor: "#FFEB3B", borderWidth: 2 }]}>
-          <Text style={styles.boxText}>
-            Risco Moderado:{" "}
-            <Text style={styles.highlightYellow}>93% - 94%</Text>
-          </Text>
+          <Text style={styles.boxText}>Risco Moderado: <Text style={styles.highlightYellow}>93% - 94%</Text></Text>
         </View>
 
         <View style={[styles.box, { borderColor: "#E53935", borderWidth: 2 }]}>
-          <Text style={styles.boxText}>
-            Risco Gravíssimo:{" "}
-            <Text style={styles.highlightRed}>Abaixo de 92%</Text>
-          </Text>
+          <Text style={styles.boxText}>Risco Gravíssimo: <Text style={styles.highlightRed}>Abaixo de 92%</Text></Text>
         </View>
-      </View>
-
-      {/* RODAPÉ */}
-      <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerItem}>
-          <Image
-            source={require("../assets/inicio.png")}
-            style={styles.footerIconLarge}
-          />
-          <Text style={styles.footerText}>Início</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.footerItem}>
-          <Image
-            source={require("../assets/servicos.png")}
-            style={styles.footerIcon}
-          />
-          <Text style={styles.footerText}>Serviços</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.footerItem}>
-          <Image
-            source={require("../assets/configuracoes.png")}
-            style={styles.footerIcon}
-          />
-          <Text style={styles.footerText}>Config.</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );

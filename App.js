@@ -1,6 +1,10 @@
+// App.js
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import useBLE from "./src/hooks/useBLE";
+
+// === Telas do seu app ===
 import Login from "./src/Login";
 import Cadastro from "./src/Cadastro";
 import TelaInicial from "./src/TelaInicial";
@@ -11,39 +15,33 @@ import OximetriaScreen from "./src/Oximetria";
 const Stack = createStackNavigator();
 
 export default function App() {
+  // 🔹 Inicializa o BLE uma vez e compartilha com todas as telas
+  const ble = useBLE();
+
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen 
-          name="Login" 
-          component={Login} 
-          options={{ headerShown: false }} 
-        />
-        <Stack.Screen 
-          name="Cadastro" 
-          component={Cadastro} 
-          options={{ headerShown: false }} 
-        />
-        <Stack.Screen 
-          name="TelaInicial" 
-          component={TelaInicial} 
-          options={{ headerShown: false }} 
-        />
-        <Stack.Screen 
-          name="GlicemiaScreen" 
-          component={GlicemiaScreen} 
-          options={{ headerShown: false }} 
-        />
-        <Stack.Screen 
-          name="BPMScreen" 
-          component={BPMScreen} 
-          options={{ headerShown: false }} 
-        />
-        <Stack.Screen 
-          name="OximetriaScreen" 
-          component={OximetriaScreen} 
-          options={{ headerShown: false }} 
-        />
+      <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Login">
+          {(props) => <Login {...props} ble={ble} />}
+        </Stack.Screen>
+
+        <Stack.Screen name="Cadastro" component={Cadastro} />
+
+        <Stack.Screen name="TelaInicial">
+          {(props) => <TelaInicial {...props} ble={ble} />}
+        </Stack.Screen>
+
+        <Stack.Screen name="GlicemiaScreen">
+          {(props) => <GlicemiaScreen {...props} ble={ble} />}
+        </Stack.Screen>
+
+        <Stack.Screen name="BPMScreen">
+          {(props) => <BPMScreen {...props} ble={ble} />}
+        </Stack.Screen>
+
+        <Stack.Screen name="OximetriaScreen">
+          {(props) => <OximetriaScreen {...props} ble={ble} />}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

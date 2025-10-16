@@ -7,12 +7,11 @@ const windowWidth = Dimensions.get("window").width;
 export default function GlicemiaScreen({ navigation, ble }) {
   const { glucose } = ble || {};
 
-  // Dados de exemplo (você pode trocar pelos valores reais coletados)
   const glicemiaData = {
     labels: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
     datasets: [
       {
-        data: [95, 102, 88, 110, 97, 120, glucose ?? 100], // inclui última leitura
+        data: [95, 102, 88, 110, 97, 120, glucose ?? 100],
         color: () => "#007B83",
         strokeWidth: 2,
       },
@@ -21,27 +20,23 @@ export default function GlicemiaScreen({ navigation, ble }) {
 
   return (
     <View style={styles.container}>
-      {/* TOPO */}
       <View style={styles.topBar}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image source={require("../assets/volta.png")} style={styles.backIcon} />
         </TouchableOpacity>
       </View>
 
-      {/* USER */}
       <View style={styles.greetingWhite}>
         <Text style={styles.helloText}>
           <Text style={{ fontWeight: "bold" }}>(User):</Text>
         </Text>
       </View>
 
-      {/* ÁREA AZUL */}
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={styles.blueContainer}>
           <Text style={styles.titleText}>Glicemia</Text>
           <Text style={styles.subtitleText}>Suas aferições:</Text>
 
-          {/* GRÁFICO */}
           <View style={styles.graphContainer}>
             <View style={styles.graphBox}>
               <LineChart
@@ -58,22 +53,18 @@ export default function GlicemiaScreen({ navigation, ble }) {
                   propsForDots: { r: "4", strokeWidth: "2", stroke: "#007B83" },
                 }}
                 bezier
-                style={{
-                  borderRadius: 10,
-                }}
+                style={{ borderRadius: 10 }}
               />
               <Text style={styles.graphText}>
                 Última leitura: {glucose ?? "---"} mg/dL
               </Text>
             </View>
 
-            {/* MÉDIA */}
             <Text style={styles.mediaText}>A média da sua glicemia é --- mg/dL</Text>
           </View>
         </View>
       </ScrollView>
 
-      {/* RODAPÉ */}
       <View style={styles.footer}>
         <TouchableOpacity style={styles.footerItem}>
           <Image source={require("../assets/inicio.png")} style={styles.footerIconLarge} />

@@ -1,31 +1,31 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
-export default function BPMScreen({ navigation, ble }) {
-  const { bpm } = ble;
+export default function BPMScreen({ navigation, route }) {
+  const { ble } = route.params || {};
+  const { bpm } = ble || {};
 
   return (
     <View style={styles.container}>
-      {/* TOPO */}
       <View style={styles.topBar}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image source={require("../assets/volta.png")} style={styles.backIcon} />
         </TouchableOpacity>
       </View>
 
-      {/* USER */}
       <View style={styles.greetingWhite}>
-        <Text style={styles.helloText}><Text style={{ fontWeight: "bold" }}>(User):</Text></Text>
+        <Text style={styles.helloText}>
+          <Text style={{ fontWeight: "bold" }}>(User):</Text>
+        </Text>
       </View>
 
-      {/* CONTEÚDO */}
       <View style={styles.contentContainer}>
         <Text style={styles.title}>Batimentos por minuto:</Text>
 
         <View style={styles.heartRow}>
           <View style={styles.dataBox}>
             <Text style={styles.dataTitle}>Última leitura:</Text>
-            <Text style={styles.dataValue}>{bpm ?? "---"}</Text>
+            <Text style={styles.dataValue}>{bpm != null ? bpm : "---"}</Text>
             <Text style={styles.dataSubtitle}>BPM</Text>
           </View>
 

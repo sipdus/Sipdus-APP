@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
-export default function OximetriaScreen({ navigation, ble }) {
-  const { spo2 } = ble;
+export default function OximetriaScreen({ navigation, route }) {
+  const { ble } = route.params || {};
+  const { spo2 } = ble || {};
 
   return (
     <View style={styles.container}>
@@ -13,7 +14,9 @@ export default function OximetriaScreen({ navigation, ble }) {
       </View>
 
       <View style={styles.greetingWhite}>
-        <Text style={styles.helloText}><Text style={{ fontWeight: "bold" }}>(User):</Text></Text>
+        <Text style={styles.helloText}>
+          <Text style={{ fontWeight: "bold" }}>(User):</Text>
+        </Text>
       </View>
 
       <View style={styles.contentContainer}>
@@ -22,7 +25,7 @@ export default function OximetriaScreen({ navigation, ble }) {
         <View style={styles.oximeterRow}>
           <View style={styles.dataBox}>
             <Text style={styles.dataTitle}>Última leitura:</Text>
-            <Text style={styles.dataValue}>{spo2 ?? "--"}</Text>
+            <Text style={styles.dataValue}>{spo2 != null ? spo2 : "--"}</Text>
             <Text style={styles.dataSubtitle}>SpO₂</Text>
           </View>
 

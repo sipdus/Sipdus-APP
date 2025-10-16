@@ -5,33 +5,29 @@ const DATA = [
   { id: "1", title: "Glicemia", image: require("../assets/glicemia.png") },
   { id: "2", title: "BPM", image: require("../assets/BPM.png") },
   { id: "3", title: "Oximetria", image: require("../assets/SP02.png") },
-  //{ id: "4", title: "Colesterol", image: require("../assets/colesterol.png") },
-  //{ id: "5", title: "Refeições", image: require("../assets/refeicao.png") },
-  
 ];
 
-export default function TelaInicial({ navigation }) {
+export default function TelaInicial({ navigation, ble }) {
   const renderItem = ({ item }) => (
     <TouchableOpacity
-    style={styles.card}
-    onPress={() => {
-      if (item.title === "Glicemia") {
-        navigation.navigate("GlicemiaScreen");
-      } else if (item.title === "BPM") {
-        navigation.navigate("BPMScreen");
-      } else if (item.title === "Oximetria"){
-        navigation.navigate("OximetriaScreen");
-      }
-    }}
-  >
-    <Image source={item.image} style={styles.cardImage} />
-    <Text style={styles.cardText}>{item.title}</Text>
-  </TouchableOpacity>
+      style={styles.card}
+      onPress={() => {
+        if (item.title === "Glicemia") {
+          navigation.navigate("GlicemiaScreen", { ble });
+        } else if (item.title === "BPM") {
+          navigation.navigate("BPMScreen", { ble });
+        } else if (item.title === "Oximetria") {
+          navigation.navigate("OximetriaScreen", { ble });
+        }
+      }}
+    >
+      <Image source={item.image} style={styles.cardImage} />
+      <Text style={styles.cardText}>{item.title}</Text>
+    </TouchableOpacity>
   );
 
   return (
     <View style={styles.container}>
-
       {/* TOPO BRANCO COM MENU, LOGO E NOTIFICAÇÃO */}
       <View style={styles.topBar}>
         <TouchableOpacity>
@@ -45,7 +41,21 @@ export default function TelaInicial({ navigation }) {
 
       {/* SAUDAÇÃO (AINDA NO FUNDO BRANCO) */}
       <View style={styles.greetingWhite}>
-        <Text style={styles.helloText}>Olá, <Text style={{ fontWeight: 'bold' }}>(User)</Text></Text>
+        <Text style={styles.helloText}>
+          Olá, <Text style={{ fontWeight: "bold" }}>(User)</Text>
+        </Text>
+      </View>
+
+      {/* STATUS DE CONEXÃO BLE */}
+      <View style={styles.bleStatusContainer}>
+        <Text
+          style={[
+            styles.bleStatusText,
+            { color: ble?.device ? "#00C853" : "#D32F2F" },
+          ]}
+        >
+          {ble?.device ? "Sensor conectado ✅" : "Nenhum sensor conectado"}
+        </Text>
       </View>
 
       {/* ÁREA AZUL COM OS CARDS */}
@@ -53,7 +63,7 @@ export default function TelaInicial({ navigation }) {
         <Text style={styles.subtitleText}>Suas informações:</Text>
         <FlatList
           data={DATA}
-          keyExtractor={item => item.id}
+          keyExtractor={(item) => item.id}
           renderItem={renderItem}
           contentContainerStyle={styles.list}
           showsVerticalScrollIndicator={false}
@@ -78,6 +88,7 @@ export default function TelaInicial({ navigation }) {
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
